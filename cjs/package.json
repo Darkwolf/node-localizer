@@ -1,0 +1,40 @@
+{
+  "name": "@darkwolf/localizer.cjs",
+  "version": "1.0.0",
+  "description": "Localizer",
+  "main": "./lib/index.js",
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darkwolf/node-localizer.git"
+  },
+  "keywords": [
+    "darkwolf",
+    "dw",
+    "localizer",
+    "cjs",
+    "localization",
+    "internationalization",
+    "l11n",
+    "i18n",
+    "locales",
+    "languages",
+    "converter",
+    "formatter"
+  ],
+  "author": "Pavel Wolf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Darkwolf/node-localizer/issues"
+  },
+  "homepage": "https://github.com/Darkwolf/node-localizer#readme",
+  "dependencies": {
+    "@darkwolf/custom-error.cjs": "^1.0.1",
+    "@darkwolf/helper.cjs": "^1.0.4"
+  }
+}

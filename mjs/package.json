@@ -1,0 +1,55 @@
+{
+  "name": "@darkwolf/localizer.mjs",
+  "version": "1.0.0",
+  "description": "Localizer",
+  "type": "module",
+  "exports": {
+    ".": "./lib/index.mjs",
+    "./": "./lib/",
+    "./errors": "./lib/errors/index.mjs",
+    "./errors/": "./lib/errors/",
+    "./errors/Error": "./lib/errors/Error.mjs",
+    "./errors/LocaleNotFoundError": "./lib/errors/LocaleNotFoundError.mjs",
+    "./Error": "./lib/errors/Error.mjs",
+    "./LocaleNotFoundError": "./lib/errors/LocaleNotFoundError.mjs",
+    "./constants": "./lib/constants/index.mjs",
+    "./constants/": "./lib/constants/",
+    "./constants/Language": "./lib/constants/Language.mjs",
+    "./Language": "./lib/constants/Language.mjs",
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darkwolf/node-localizer.git"
+  },
+  "keywords": [
+    "darkwolf",
+    "dw",
+    "localizer",
+    "mjs",
+    "localization",
+    "internationalization",
+    "l11n",
+    "i18n",
+    "locales",
+    "languages",
+    "converter",
+    "formatter"
+  ],
+  "author": "Pavel Wolf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Darkwolf/node-localizer/issues"
+  },
+  "homepage": "https://github.com/Darkwolf/node-localizer#readme",
+  "dependencies": {
+    "@darkwolf/custom-error.mjs": "^1.0.1",
+    "@darkwolf/helper.mjs": "^1.0.4"
+  }
+}

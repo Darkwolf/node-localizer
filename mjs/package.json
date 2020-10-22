@@ -1,6 +1,6 @@
 {
   "name": "@darkwolf/localizer.mjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Localizer",
   "type": "module",
   "exports": {
@@ -15,7 +15,11 @@
     "./constants": "./lib/constants/index.mjs",
     "./constants/": "./lib/constants/",
     "./constants/Language": "./lib/constants/Language.mjs",
+    "./constants/PluralType": "./lib/constants/PluralType.mjs",
+    "./constants/PluralCategory": "./lib/constants/PluralCategory.mjs",
     "./Language": "./lib/constants/Language.mjs",
+    "./PluralType": "./lib/constants/PluralType.mjs",
+    "./PluralCategory": "./lib/constants/PluralCategory.mjs",
     "./package.json": "./package.json"
   },
   "engines": {
@@ -50,6 +54,6 @@
   "homepage": "https://github.com/Darkwolf/node-localizer#readme",
   "dependencies": {
     "@darkwolf/custom-error.mjs": "^1.0.1",
-    "@darkwolf/helper.mjs": "^1.0.4"
+    "@darkwolf/helper.mjs": "^1.0.5"
   }
 }

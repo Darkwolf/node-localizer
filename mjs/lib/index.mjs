@@ -4,7 +4,9 @@ import errors, {
   LocaleNotFoundError
 } from './errors/index.mjs'
 import constants, {
-  Language
+  Language,
+  PluralType,
+  PluralCategory
 } from './constants/index.mjs'
 
 export {
@@ -12,7 +14,9 @@ export {
   Error,
   LocaleNotFoundError,
   constants,
-  Language
+  Language,
+  PluralType,
+  PluralCategory
 }
 
 export default class Localizer {
@@ -46,6 +50,8 @@ export default class Localizer {
   static LocaleNotFoundError = LocaleNotFoundError
   static constants = constants
   static Language = Language
+  static PluralType = PluralType
+  static PluralCategory = PluralCategory
 
   constructor(locales, options = {}) {
     this
@@ -108,5 +114,16 @@ export default class Localizer {
       }
       throw e
     }
+  }
+
+  plural(number, options = {}) {
+    return new Intl.PluralRules(this.language, {
+      minimumIntegerDigits: options.minIntegerDigits,
+      minimumFractionDigits: options.minFractionDigits,
+      maximumFractionDigits: options.maxFractionDigits,
+      minimumSignificantDigits: options.minSignificantDigits,
+      maximumSignificantDigits: options.maxSignificantDigits,
+      ...options
+    }).select(number)
   }
 }

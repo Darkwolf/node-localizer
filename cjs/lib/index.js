@@ -6,7 +6,9 @@ const {
   LocaleNotFoundError
 } = errors
 const {
-  Language
+  Language,
+  PluralType,
+  PluralCategory
 } = constants
 
 class Localizer {
@@ -72,6 +74,17 @@ class Localizer {
       throw e
     }
   }
+
+  plural(number, options = {}) {
+    return new Intl.PluralRules(this.language, {
+      minimumIntegerDigits: options.minIntegerDigits,
+      minimumFractionDigits: options.minFractionDigits,
+      maximumFractionDigits: options.maxFractionDigits,
+      minimumSignificantDigits: options.minSignificantDigits,
+      maximumSignificantDigits: options.maxSignificantDigits,
+      ...options
+    }).select(number)
+  }
 }
 Localizer.language = Language.EN
 Localizer.fallbacks = {
@@ -103,5 +116,7 @@ Localizer.Error = Error
 Localizer.LocaleNotFoundError = LocaleNotFoundError
 Localizer.constants = constants
 Localizer.Language = Language
+Localizer.PluralType = PluralType
+Localizer.PluralCategory = PluralCategory
 
 module.exports = Localizer

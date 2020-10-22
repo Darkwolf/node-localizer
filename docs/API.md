@@ -51,6 +51,12 @@
 #### `static` Localizer.Language
 * returns: <[Language](#class-language)>
 
+#### `static` Localizer.PluralType
+* returns: <[PluralType](#class-pluraltype)>
+
+#### `static` Localizer.PluralCategory
+* returns: <[PluralCategory](#class-pluralcategory)>
+
 #### `init` new Localizer([locales[, options]])
 * `locales` <[Object][Object]>
 * `options` <[Object][Object]>
@@ -93,6 +99,17 @@
   * `normalize` <?[boolean][boolean]> If `true`, then the property is `undefined` or `null` will be replaced with `''`. Defaults to `true`.
 * returns: <[any][Object]>
 
+#### localizer.plural(number[, options])
+* `number` <[number][number]>
+* `options` <[Object][Object]>
+  * `type` <?[string][string]> Must be `'cardinal'` or `'ordinal'`. Defaults to `'cardinal'`.
+  * `minIntegerDigits` <?[number][number]>
+  * `minFractionDigits` <?[number][number]>
+  * `maxFractionDigits` <?[number][number]>
+  * `minSignificantDigits` <?[number][number]>
+  * `maxSignificantDigits` <?[number][number]>
+* returns: <[string][string]> `'zero'`, `'one'`, `'two'`, `'few'`, `'many'` or `'other'` will be returned.
+
 ### class: Errors
 #### `static` Errors.Error
 * returns: <[LocalizerError](#class-localizererror)>
@@ -118,6 +135,12 @@
 ### class: Constants
 #### `static` Constants.Language
 * returns: <[Language](#class-language)>
+
+#### `static` Constants.PluralType
+* returns: <[PluralType](#class-pluraltype)>
+
+#### `static` Constants.PluralCategory
+* returns: <[PluralCategory](#class-pluralcategory)>
 
 ### class: Language
 #### `static` Language.AR
@@ -188,3 +211,29 @@
 
 #### `static` Language.ZH_TW
 * returns: <[string][string]> Chinese (Taiwan) language code. Defaults to `'zh-TW'`.
+
+### class: PluralType
+#### `static` PluralType.CARDINAL
+* returns: <[string][string]> Defaults to `'cardinal'`.
+
+#### `static` PluralType.ORDINAL
+* returns: <[string][string]> Defaults to `'ordinal'`.
+
+### class: PluralCategory
+#### `static` PluralCategory.ZERO
+* returns: <[string][string]> Defaults to `'zero'`.
+
+#### `static` PluralCategory.ONE
+* returns: <[string][string]> Defaults to `'one'`.
+
+#### `static` PluralCategory.TWO
+* returns: <[string][string]> Defaults to `'two'`.
+
+#### `static` PluralCategory.FEW
+* returns: <[string][string]> Defaults to `'few'`.
+
+#### `static` PluralCategory.MANY
+* returns: <[string][string]> Defaults to `'many'`.
+
+#### `static` PluralCategory.OTHER
+* returns: <[string][string]> Defaults to `'other'`.

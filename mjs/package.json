@@ -1,6 +1,6 @@
 {
   "name": "@darkwolf/localizer.mjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Localizer",
   "type": "module",
   "exports": {
@@ -54,6 +54,6 @@
   "homepage": "https://github.com/Darkwolf/node-localizer#readme",
   "dependencies": {
     "@darkwolf/custom-error.mjs": "^1.0.1",
-    "@darkwolf/helper.mjs": "^1.0.5"
+    "@darkwolf/helper.mjs": "^1.1.0"
   }
 }

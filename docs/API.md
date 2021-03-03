@@ -11,6 +11,15 @@
 #### `static` Localizer.language
 * returns: <[string][string]> Defaults to `'en'`.
 
+#### `static` Localizer.useFallbacks
+* returns: <[boolean][boolean]> Defaults to `true`.
+
+#### `static` Localizer.ignoreErrors
+* returns: <[boolean][boolean]> Defaults to `false`.
+
+#### `static` Localizer.ignoreNotExistsProps
+* returns: <[boolean][boolean]> Defaults to `true`.
+
 #### `static` Localizer.fallbacks
 * returns: <[Object][Object]>
   * `ar` <[string][string]> Defaults to `'en'`.
@@ -61,6 +70,9 @@
 * `locales` <[Object][Object]>
 * `options` <[Object][Object]>
   * `language` <[string][string]> Defaults to `'en'`.
+  * `useFallbacks` <[boolean][boolean]> Defaults to `true`.
+  * `ignoreErrors` <[boolean][boolean]> Defaults to `false`.
+  * `ignoreNotExistsProps` <[boolean][boolean]> Defaults to `true`.
   * `fallbacks` <[Object][Object]>
 * returns: <[Localizer](#class-localizer)>
 
@@ -72,31 +84,53 @@
 * `language` <[string][string]> Defaults to `'en'`.
 * returns: <[this](#class-localizer)>
 
+#### localizer.setUseFallbacks(boolean)
+* `boolean` <[boolean][boolean]> Defaults to `true`.
+* returns: <[this](#class-localizer)>
+
+#### localizer.setIgnoreErrors(boolean)
+* `boolean` <[boolean][boolean]> If `false` and locale is `undefined` or `null` will throw an error. Defaults to `false`.
+* returns: <[this](#class-localizer)>
+
+#### localizer.setIgnoreNotExistsProps(boolean)
+* `boolean` <[boolean][boolean]> Defaults to `true`.
+* returns: <[this](#class-localizer)>
+
 #### localizer.setFallbacks(fallbacks)
 * `fallbacks` <[Object][Object]>
 * returns: <[this](#class-localizer)>
 
-#### localizer.withLanguage(language)
-* `language` <[string][string]> Defaults to `'en'`.
-* returns: <[Localizer](#class-localizer)>
+#### localizer.locale(language, path, defaultValue)
+* `language` <[string][string]>
+* `path` <[string][string] | [Array][Array]<[string][string]>> Must have format: `'object.property.key.path[0]'`. If `undefined`, `null`, `''` or `[]` will not be get.
+* `defaultValue` <[any][Object]> If value is `undefined` will be returned. Defaults to `undefined`.
+* returns: <[any][Object]>
 
 #### localizer.setLocale(language, path, value)
 * `language` <[string][string]>
-* `path` <[string][string] | [Array][Array]<[string][string]>> Must have format: `'object.property.name.array[0]'`, `['object', 'property', 'name', 'array[0]']`, `['object.property', 'name.array[0]']` or `'[-1]'`. Path with index `'[-1]'` will set the last argument of the array, then `'[-2]'` will set the second last argument. If the negative modulo index is greater than the length of the array, the first argument will be set.
+* `path` <[string][string] | [Array][Array]<[string][string]>> Must have format: `'object.property.key.path[0]'`. If `undefined`, `null`, `''` or `[]` will not be set.
 * `value` <[any][Object]>
 * returns: <[this](#class-localizer)>
 
-#### localizer.locale(language, path)
+#### localizer.deleteLocale(language, path)
 * `language` <[string][string]>
-* `path` <[string][string] | [Array][Array]<[string][string]>> Must have format: `'object.property.name.array[0]'`, `['object', 'property', 'name', 'array[0]']`, `['object.property', 'name.array[0]']` or `'[-1]'`. Path with index `'[-1]'` will return the last argument of the array, then `'[-2]'` will return the second last argument. If the negative modulo index is greater than the length of the array, the first argument will be returned.
-* returns: <[any][Object]>
+* `path` <[string][string] | [Array][Array]<[string][string]>> Must have format: `'object.property.key.path[0]'`. If `undefined`, `null`, `''` or `[]` will not be deleted.
+* returns: <[boolean][boolean]>
+
+#### localizer.hasLocale(language, path)
+* `language` <[string][string]>
+* `path` <[string][string] | [Array][Array]<[string][string]>> Must have format: `'object.property.key.path[0]'`. If `undefined`, `null`, `''` or `[]` will not be used.
+* returns: <[boolean][boolean]>
 
 #### localizer.localize(path[, options])
-* `path` <[string][string] | [Array][Array]<[string][string]>> Must have format: `'object.property.name.array[0]'`, `['object', 'property', 'name', 'array[0]']`, `['object.property', 'name.array[0]']` or `'[-1]'`. Path with index `'[-1]'` will return the last argument of the array, then `'[-2]'` will return the second last argument. If the negative modulo index is greater than the length of the array, the first argument will be returned.
+* `path` <[string][string] | [Array][Array]<[string][string]>> Must have format: `'object.property.key.path[0]'`. If `undefined`, `null`, `''` or `[]` will not be get.
 * `options` <[Object][Object]>
-  * `language` <?[string][string]>
-  * `props` <?[Object][Object]<[any][Object]>>
-  * `normalize` <?[boolean][boolean]> If `true`, then the property is `undefined` or `null` will be replaced with `''`. Defaults to `true`.
+  * `language` <?[string][string]> Defaults to `this.language`.
+  * `useFallbacks` <?[boolean][boolean]> Defaults to `this.useFallbacks`.
+  * `ignoreErrors` <?[boolean][boolean]> If `false` and locale is `undefined` or `null` will throw an error. Defaults to `this.ignoreErrors`.
+  * `props` <?[Object][Object]<[any][Object]>> Defaults to `{}`.
+  * `ignoreNotExistsProps` <?[boolean][boolean]> If `true` and property is `undefined` or `null` will be replaced with `''`. Defaults to `this.ignoreNotExistsProps`.
+  * `defaultValue` <?[any][Object]> If locale is `undefined` or `null` will be returned. Defaults to `undefined`.
 * returns: <[any][Object]>
 
 #### localizer.plural(number[, options])
@@ -109,6 +143,13 @@
   * `minSignificantDigits` <?[number][number]>
   * `maxSignificantDigits` <?[number][number]>
 * returns: <[string][string]> `'zero'`, `'one'`, `'two'`, `'few'`, `'many'` or `'other'` will be returned.
+
+#### localizer.withLanguage(language)
+* `language` <[string][string]> Defaults to `'en'`.
+* returns: <[Localizer](#class-localizer)>
+
+#### localizer.clone()
+* returns: <[Localizer](#class-localizer)>
 
 ### class: Errors
 #### `static` Errors.Error

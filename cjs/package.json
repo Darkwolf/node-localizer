@@ -1,6 +1,6 @@
 {
   "name": "@darkwolf/localizer.cjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Localizer",
   "main": "./lib/index.js",
   "engines": {
@@ -35,6 +35,6 @@
   "homepage": "https://github.com/Darkwolf/node-localizer#readme",
   "dependencies": {
     "@darkwolf/custom-error.cjs": "^1.0.1",
-    "@darkwolf/helper.cjs": "^1.0.5"
+    "@darkwolf/helper.cjs": "^1.1.0"
   }
 }

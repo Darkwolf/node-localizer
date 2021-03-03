@@ -5,7 +5,7 @@ export default class LocaleNotFoundError extends Error {
   static code = 'locale-not-found'
 
   constructor(language, path) {
-    super(`Locale not found: '${language}.${path}'.`, LocaleNotFoundError.code)
+    super(`Locale for language '${language}' not found: '${path}'.`, LocaleNotFoundError.code)
     this.setName(LocaleNotFoundError.name)
   }
 }

@@ -5,6 +5,7 @@
 [Function]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function
 [Array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 [CustomError]: https://github.com/Darkwolf/node-custom-error/blob/main/docs/API.md
+[PluralRules]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules
 
 # API
 ### class: Localizer
@@ -66,6 +67,29 @@
 #### `static` Localizer.PluralCategory
 * returns: <[PluralCategory](#class-pluralcategory)>
 
+#### `static` Localizer.pluralRules([options])
+* `options` <[Object][Object]>
+  * `language` <?[string][string]> Defaults to `'en'`.
+  * `type` <?[string][string]<[PluralType](#class-pluraltype)>> Must be `'cardinal'` or `'ordinal'`. Defaults to `'cardinal'`.
+  * `minIntegerDigits` <?[number][number]>
+  * `minFractionDigits` <?[number][number]>
+  * `maxFractionDigits` <?[number][number]>
+  * `minSignificantDigits` <?[number][number]>
+  * `maxSignificantDigits` <?[number][number]>
+* returns: <[PluralRules][PluralRules]>
+
+#### `static` Localizer.pluralCategory(number[, options])
+* `number` <[number][number]>
+* `options` <[Object][Object]>
+  * `language` <?[string][string]> Defaults to `'en'`.
+  * `type` <?[string][string]<[PluralType](#class-pluraltype)>> Must be `'cardinal'` or `'ordinal'`. Defaults to `'cardinal'`.
+  * `minIntegerDigits` <?[number][number]>
+  * `minFractionDigits` <?[number][number]>
+  * `maxFractionDigits` <?[number][number]>
+  * `minSignificantDigits` <?[number][number]>
+  * `maxSignificantDigits` <?[number][number]>
+* returns: <[string][string]<[PluralCategory](#class-pluralcategory)>> `'zero'`, `'one'`, `'two'`, `'few'`, `'many'` or `'other'` will be returned.
+
 #### `init` new Localizer([locales[, options]])
 * `locales` <[Object][Object]>
 * `options` <[Object][Object]>
@@ -100,7 +124,7 @@
 * `fallbacks` <[Object][Object]>
 * returns: <[this](#class-localizer)>
 
-#### localizer.locale(language, path, defaultValue)
+#### localizer.getLocale(language, path, defaultValue)
 * `language` <[string][string]>
 * `path` <[string][string] | [Array][Array]<[string][string]>> Must have format: `'object.property.key.path[0]'`. If `undefined`, `null`, `''` or `[]` will not be get.
 * `defaultValue` <[any][Object]> If value is `undefined` will be returned. Defaults to `undefined`.
@@ -133,16 +157,28 @@
   * `defaultValue` <?[any][Object]> If locale is `undefined` or `null` will be returned. Defaults to `undefined`.
 * returns: <[any][Object]>
 
-#### localizer.plural(number[, options])
-* `number` <[number][number]>
+#### `static` Localizer.pluralRules([options])
 * `options` <[Object][Object]>
-  * `type` <?[string][string]> Must be `'cardinal'` or `'ordinal'`. Defaults to `'cardinal'`.
+  * `language` <?[string][string]> Defaults to `this.language`.
+  * `type` <?[string][string]<[PluralType](#class-pluraltype)>> Must be `'cardinal'` or `'ordinal'`. Defaults to `'cardinal'`.
   * `minIntegerDigits` <?[number][number]>
   * `minFractionDigits` <?[number][number]>
   * `maxFractionDigits` <?[number][number]>
   * `minSignificantDigits` <?[number][number]>
   * `maxSignificantDigits` <?[number][number]>
-* returns: <[string][string]> `'zero'`, `'one'`, `'two'`, `'few'`, `'many'` or `'other'` will be returned.
+* returns: <[PluralRules][PluralRules]>
+
+#### localizer.pluralCategory(number[, options])
+* `number` <[number][number]>
+* `options` <[Object][Object]>
+  * `language` <?[string][string]> Defaults to `this.language`.
+  * `type` <?[string][string]<[PluralType](#class-pluraltype)>> Must be `'cardinal'` or `'ordinal'`. Defaults to `'cardinal'`.
+  * `minIntegerDigits` <?[number][number]>
+  * `minFractionDigits` <?[number][number]>
+  * `maxFractionDigits` <?[number][number]>
+  * `minSignificantDigits` <?[number][number]>
+  * `maxSignificantDigits` <?[number][number]>
+* returns: <[string][string]<[PluralCategory](#class-pluralcategory)>> `'zero'`, `'one'`, `'two'`, `'few'`, `'many'` or `'other'` will be returned.
 
 #### localizer.withLanguage(language)
 * `language` <[string][string]> Defaults to `'en'`.

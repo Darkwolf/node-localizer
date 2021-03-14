@@ -56,6 +56,49 @@ export default class Localizer {
   static PluralType = PluralType
   static PluralCategory = PluralCategory
 
+  static pluralRules(options = {}) {
+    if (!Localizer.pluralRules.cache) {
+      Localizer.pluralRules.cache = {}
+    }
+    const language = options.language || Localizer.language
+    const params = {}
+    if (options.type) {
+      params.type = options.type
+    }
+    if (Helper.exists(options.minIntegerDigits)) {
+      params.minIntegerDigits = options.minIntegerDigits
+    }
+    if (Helper.exists(options.minFractionDigits)) {
+      params.minFractionDigits = options.minFractionDigits
+    }
+    if (Helper.exists(options.maxFractionDigits)) {
+      params.maxFractionDigits = options.maxFractionDigits
+    }
+    if (Helper.exists(options.minSignificantDigits)) {
+      params.minSignificantDigits = options.minSignificantDigits
+    }
+    if (Helper.exists(options.maxSignificantDigits)) {
+      params.maxSignificantDigits = options.maxSignificantDigits
+    }
+    const paramsString = Object.keys(params).sort().map(key => `${key}:${params[key]}`).join()
+    const cacheKey = `${language}${paramsString ? `+${paramsString}` : ''}`
+    if (!Localizer.pluralRules.cache[cacheKey]) {
+      Localizer.pluralRules.cache[cacheKey] = new Intl.PluralRules(language, {
+        type: params.type,
+        minimumIntegerDigits: params.minIntegerDigits,
+        minimumFractionDigits: params.minFractionDigits,
+        maximumFractionDigits: params.maxFractionDigits,
+        minimumSignificantDigits: params.minSignificantDigits,
+        maximumSignificantDigits: params.maxSignificantDigits
+      })
+    }
+    return Localizer.pluralRules.cache[cacheKey]
+  }
+
+  static pluralCategory(number, options) {
+    return Localizer.pluralRules(options).select(number)
+  }
+
   constructor(locales, options = {}) {
     this
       .setLocales(locales)
@@ -96,7 +139,7 @@ export default class Localizer {
     return this
   }
 
-  locale(language, path, defaultValue) {
+  getLocale(language, path, defaultValue) {
     return Helper.get(this.locales, [language, ...Helper.toPath(path)], defaultValue)
   }
 
@@ -118,12 +161,12 @@ export default class Localizer {
     const ignoreErrors = Helper.isBoolean(options.ignoreErrors) ? options.ignoreErrors : this.ignoreErrors
     const ignoreNotExistsProps = Helper.isBoolean(options.ignoreNotExistsProps) ? options.ignoreNotExistsProps : this.ignoreNotExistsProps
     let language = options.language || this.language
-    let locale = this.locale(language, path)
+    let locale = this.getLocale(language, path)
     if (!Helper.exists(locale) && useFallbacks) {
       for (let i = 0; i < Object.keys(this.fallbacks).length; i++) {
         const fallback = this.fallbacks[language]
         if (fallback) {
-          locale = this.locale(fallback, path)
+          locale = this.getLocale(fallback, path)
           if (Helper.exists(locale)) {
             break
           } else {
@@ -144,15 +187,15 @@ export default class Localizer {
     throw new LocaleNotFoundError(language, path)
   }
 
-  plural(number, options = {}) {
-    return new Intl.PluralRules(options.language || this.language, {
-      minimumIntegerDigits: options.minIntegerDigits,
-      minimumFractionDigits: options.minFractionDigits,
-      maximumFractionDigits: options.maxFractionDigits,
-      minimumSignificantDigits: options.minSignificantDigits,
-      maximumSignificantDigits: options.maxSignificantDigits,
-      ...options
-    }).select(number)
+  pluralRules(options = {}) {
+    return Localizer.pluralRules({
+      ...options,
+      language: options.language || this.language
+    })
+  }
+
+  pluralCategory(number, options) {
+    return this.pluralRules(options).select(number)
   }
 
   withLanguage(language) {

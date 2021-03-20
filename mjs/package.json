@@ -1,6 +1,6 @@
 {
   "name": "@darkwolf/localizer.mjs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Localizer",
   "type": "module",
   "exports": {

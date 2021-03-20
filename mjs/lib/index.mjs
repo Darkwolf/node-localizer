@@ -114,8 +114,8 @@ export default class Localizer {
     return this
   }
 
-  setLanguage(language = Localizer.language) {
-    this.language = language
+  setLanguage(language) {
+    this.language = language || Localizer.language
     return this
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "@darkwolf/localizer.cjs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Localizer",
   "main": "./lib/index.js",
   "engines": {
